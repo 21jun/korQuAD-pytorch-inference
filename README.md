@@ -96,7 +96,7 @@ doc = """
 q = "유럽연합의 GDP를 추월한 국가는?"
 
 okt = Okt()
-# doc = ' '.join(okt.morphs(doc))  정답에 조사를 제거하고 싶다면...
+# doc = ' '.join(okt.morphs(doc))  # 정답에 조사를 제거하고 싶다면...
 # q = ' '.join(okt.morphs(q))
 
 answer = model.predict(doc, q)
