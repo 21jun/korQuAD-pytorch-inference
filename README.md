@@ -297,3 +297,7 @@ curl --location --request POST 'http://localhost:8000/predict' \
     }
 }
 ```
+
+## Postman
+
+![postman](img/postman.png)
