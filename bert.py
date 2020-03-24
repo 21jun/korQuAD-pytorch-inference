@@ -70,7 +70,7 @@ class QA:
         all_results = []
         for batch in eval_dataloader:
             batch = tuple(t.to(self.device) for t in batch)
-            print(batch)
+            # print(batch)
             with torch.no_grad():
                 inputs = {'input_ids':      batch[0],
                           'attention_mask': batch[1],
