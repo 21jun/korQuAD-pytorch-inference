@@ -27,6 +27,8 @@ class QA:
         self.n_best_size = 20
         self.max_answer_length = 30
         self.model, self.tokenizer = self.load_model(model_path)
+        # print(self.model)
+
         if torch.cuda.is_available():
             self.device = 'cuda'
         else:
@@ -47,7 +49,9 @@ class QA:
         features = squad_examples_to_features(
             example, self.tokenizer, self.max_seq_length, self.doc_stride, self.max_query_length)
 
-        # print(features[0].tokens)
+        # print("================================")
+        # print(features[0].__dict__)
+        # print("================================")
 
         all_input_ids = torch.tensor(
             [f.input_ids for f in features], dtype=torch.long)
@@ -57,6 +61,7 @@ class QA:
             [f.segment_ids for f in features], dtype=torch.long)
         all_example_index = torch.arange(
             all_input_ids.size(0), dtype=torch.long)
+
         dataset = TensorDataset(all_input_ids, all_input_mask, all_segment_ids,
                                 all_example_index)
         eval_sampler = SequentialSampler(dataset)
@@ -65,7 +70,7 @@ class QA:
         all_results = []
         for batch in eval_dataloader:
             batch = tuple(t.to(self.device) for t in batch)
-            # print(batch)
+            print(batch)
             with torch.no_grad():
                 inputs = {'input_ids':      batch[0],
                           'attention_mask': batch[1],
