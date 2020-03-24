@@ -1,20 +1,18 @@
 # -*- coding:utf-8 -*-
 from bert import QA
+from konlpy.tag import Okt
 
 model = QA('model')
 
-# doc = "Victoria has a written constitution enacted in 1975, but based on the 1855 colonial constitution, passed by the United Kingdom Parliament as the Victoria Constitution Act 1855, which establishes the Parliament as the state's law-making body for matters coming under state responsibility. The Victorian Constitution can be amended by the Parliament of Victoria, except for certain 'entrenched' provisions that require either an absolute majority in both houses, a three-fifths majority in both houses, or the approval of the Victorian people in a referendum, depending on the provision."
 doc = """
-배터리 용량 은 내장 형 3600 mAh 이 다 . 
-이 는 디스플레이 크기 를 키우 면서 내부 적 으로 활용 할 수 있 는 공간 이 늘 었 고 기기 두께 도 상대 적 으로 두꺼워 졌 기 때문 으로 전작 인 갤럭시 S 6 엣지 와 비교 할 때 약 1000 mAh 가량 증가 한 수 치이 며 갤럭시 S 6 엣지 + 와 비교 할 때 도 약 600 mAh 가량 증가 한 수치 로 , 
-배터리 타임 은 갤럭시 노트 4 대비 약 70 % 정도 오른 수준 으로 체감 된다고 한다 . 
-또한 , 전작 인 갤럭시 S 6 엣지 와 마찬가지 로 삼성전자 Adaptive fast charging 고속 충전 솔루션 과 자기 유도 방식 인 Qi 규격 과 자기 유도 방식 이나 , 
-최근 자기 공진 방식 의 A 4 WP 와 호환 성 을 강화 한 PMA 규격 을 만족 하 는 무선 충전 솔루션 을 내장 했으며 갤럭시 S 6 엣지 + 의 고속 무선 충전 기술 까지 도입 했 다 . 
-하지만 누가 업데이트 이후 로 노트 7 사건 으로 출력 량 을 완전히 줄여 버려서 고속 무선 충전 이 라는 말 도 의미 없 어 진 것 같 다 .
+유럽의 정치 경제 통합을 실현하기 위하여 1993년 11월 1일 발효된 마스트리히트 조약에 따라 유럽 12개국이 참가하여 출범한 연합 기구다. 2020년 2월 기준, 가입국은 27개국이다. 27개국을 모두 합치면 인구는 약 5억, 경제 규모는 미국과 맞먹는 거대한 집단이라서 세계 주요 정치, 외교, 안보, 경제, 사회, 환경 현안에서도 EU 집행위원장은 강대국의 대통령과 버금가는 대우를 받는다. 현재 지구상에서 가장 구속력 있게 단결되어 있는 국가집단이라고 할 수 있다. 유로화는 특별인출권에서 미국 달러 다음으로 2위의 비율을 차지하고 있다.현재 EU가 세계에서 총 GDP 측면에서 가장 큰 경제권은 아닌데, 브렉시트 이전인 2015년 시점에서 유럽연합 GDP는 이미 미국 GDP에 추월당했다. 창립 이후부터 2010년대 초반까지는 전체 경제규모에서 미국을 능가하며 절대 무시 못할 영향력을 지녔었지만, 2008년 리먼 브라더스 사태와 이후 유로존 사태로 이어지는 만성적인 경제 불황으로 인해 미국에 추월당했다. 2020년 1월 31일 영국의 탈퇴로 EU의 경제 규모는 더 줄어들었다.모든 유럽연합 가입 국가들은 민주주의를 도입하고 사형을 폐지해야 한다. 민주주의, 인권 강조는 마스트리흐트 조약 제2관 공동 외교안보 정책 분야에 세계 인권 선언을 각국의 헌법 원리로 수용하고 명시적인 비준 동의를 할 것을 전제로 성립되어 있다.
 """
 
+q = "유럽연합의 GDP를 추월한 국가는?"
 
-q = "배터리 타임은 갤럭시 노트4 대비 얼마나 체감 되는가?"
+okt = Okt()
+# doc = ' '.join(okt.morphs(doc))  정답에 조사를 제거하고 싶다면...
+# q = ' '.join(okt.morphs(q))
 
 answer = model.predict(doc, q)
 print("Question:", q)
